@@ -19,21 +19,26 @@ public class PlayerMovement : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		// Set the horizontal movement speed
-		horizontalMovement = Input.GetAxisRaw ("Horizontal") * runSpeed;
+        // Press W key to jump
+        if (Input.GetKeyDown("w"))
+        {
+            jump = true;
+        }
+
+        // Press and holf S key to crouch
+        if (Input.GetKeyDown("s"))
+        {
+            crouch = true;
+        }
+        else if (Input.GetKeyUp("s"))
+        {
+            crouch = false;
+        }
+
+        // Set the horizontal movement speed
+        horizontalMovement = Input.GetAxisRaw ("Horizontal") * runSpeed;
 		playerAnimator.SetFloat ("Speed", Mathf.Abs(horizontalMovement));
-
-		// Press W key to jump
-		if (Input.GetKeyDown ("w")) {
-			jump = true;
-		}
-
-		// Press and holf S key to crouch
-		if (Input.GetKeyDown ("s")) {
-			crouch = true;
-		} else if (Input.GetKeyUp ("s")) {
-			crouch = false;
-		}
+        playerAnimator.SetBool ("isJump", !characterController.m_Grounded);
 	}
 
 	void FixedUpdate () {
