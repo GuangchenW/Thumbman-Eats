@@ -39,6 +39,7 @@ public class PlayerMovement : MonoBehaviour {
         horizontalMovement = Input.GetAxisRaw ("Horizontal") * runSpeed;
 		playerAnimator.SetFloat ("Speed", Mathf.Abs(horizontalMovement));
         playerAnimator.SetBool ("isJump", !characterController.m_Grounded);
+        playerAnimator.SetBool ("isCrouch", characterController.m_wasCrouching);
 	}
 
 	void FixedUpdate () {
